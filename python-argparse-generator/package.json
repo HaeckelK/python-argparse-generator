@@ -24,6 +24,7 @@
     "url": "https://github.com/HaeckelK/python-argparse-generator/issues"
   },
   "homepage": "https://github.com/HaeckelK/python-argparse-generator#readme",
+  "files": ["lib/**/*"],
   "devDependencies": {
     "prettier": "^2.5.1",
     "tslint": "^6.1.3",
