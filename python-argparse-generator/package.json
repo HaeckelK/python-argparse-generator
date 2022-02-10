@@ -4,7 +4,8 @@
   "description": "NPM package for generation of Python code (as text) to streamline writing boilerplate argparse setup.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build" : "tsc"
   },
   "repository": {
     "type": "git",
