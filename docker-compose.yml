@@ -1,0 +1,8 @@
+version: '3.8'
+services:
+  app:
+    build: .
+    tty: true
+    volumes:
+      - ./python-argparse-generator:/usr/python-argparse-generator
+      - /usr/app/node_modules
