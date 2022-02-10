@@ -1,6 +1,6 @@
 FROM node:17-alpine
 
+WORKDIR /usr
+COPY . .
 WORKDIR /usr/python-argparse-generator
-# COPY package.json .
-# RUN npm install
-# COPY . .
+RUN npm install

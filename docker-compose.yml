@@ -5,4 +5,4 @@ services:
     tty: true
     volumes:
       - ./python-argparse-generator:/usr/python-argparse-generator
-      - /usr/app/node_modules
+      - /usr/python-argparse-generator/node_modules

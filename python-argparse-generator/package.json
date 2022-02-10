@@ -1,0 +1,27 @@
+{
+  "name": "python-argparse-generator",
+  "version": "0.0.0",
+  "description": "NPM package for generation of Python code (as text) to streamline writing boilerplate argparse setup.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/HaeckelK/python-argparse-generator.git"
+  },
+  "keywords": [
+    "python",
+    "argparse",
+    "generator"
+  ],
+  "author": "HaeckelK",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/HaeckelK/python-argparse-generator/issues"
+  },
+  "homepage": "https://github.com/HaeckelK/python-argparse-generator#readme",
+  "devDependencies": {
+    "typescript": "^4.5.5"
+  }
+}
