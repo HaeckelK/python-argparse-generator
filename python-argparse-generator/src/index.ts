@@ -1,6 +1,6 @@
 export const Greeter = (name: string) => `Hello ${name}`;
 
-type Argument = {
+export type Argument = {
   name: string;
   type: string;
   variableName: string;
@@ -25,9 +25,9 @@ function argumentToText(argument: Argument) {
 const argumentToMainParams = (argument: Argument) => `${argument.variableName}: ${argument.type}`;
 
 export const GenerateCode = (args: Argument[]) => {
-  let mainParameters: string[] = args.map((arg) => argumentToMainParams(arg));
-  let argumentsText: string[] = args.map((arg) => argumentToText(arg));
-  let returnText: string[] = args.map((x) => {
+  const mainParameters: string[] = args.map((arg) => argumentToMainParams(arg));
+  const argumentsText: string[] = args.map((arg) => argumentToText(arg));
+  const returnText: string[] = args.map((x) => {
     if (x.type === 'str') {
       return `"${x.variableName}": args.${x.variableName},`;
     } else {
@@ -35,7 +35,7 @@ export const GenerateCode = (args: Argument[]) => {
     }
   });
 
-  let output = `import argparse
+  const output = `import argparse
 from typing import Dict, Any
   
 def main(${mainParameters.join(', ')}) -> None:
@@ -59,7 +59,3 @@ if __name__ == '__main__':
 `;
   return output;
 };
-
-const argument: Argument = { name: 'folder', type: 'str', variableName: 'folder', default: '', defaultDisplay: '' };
-
-console.log(GenerateCode([argument]));
