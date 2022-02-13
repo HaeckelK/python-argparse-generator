@@ -1,6 +1,6 @@
 {
   "name": "python-argparse-generator",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "NPM package for generation of Python code (as text) to streamline writing boilerplate argparse setup.",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
@@ -31,7 +31,8 @@
   },
   "homepage": "https://github.com/HaeckelK/python-argparse-generator#readme",
   "files": [
-    "lib/**/*"
+    "lib/**/*",
+    "README.md"
   ],
   "devDependencies": {
     "@types/jest": "^27.4.0",
