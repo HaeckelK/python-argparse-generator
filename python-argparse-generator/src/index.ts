@@ -1,5 +1,3 @@
-export const Greeter = (name: string) => `Hello ${name}`;
-
 export type Argument = {
   name: string;
   type: string;
