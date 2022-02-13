@@ -37,23 +37,23 @@ export const GenerateCode = (args: Argument[]) => {
 from typing import Dict, Any
   
 def main(${mainParameters.join(', ')}) -> None:
-  # Contents of main
-  return
+    # Contents of main
+    return
 
 
 def cli() -> Dict[str, Any]:
-  formatter_class = argparse.ArgumentDefaultsHelpFormatter
-  parser = argparse.ArgumentParser(formatter_class=formatter_class)
+    formatter_class = argparse.ArgumentDefaultsHelpFormatter
+    parser = argparse.ArgumentParser(formatter_class=formatter_class)
 
-  ${argumentsText.join('\n    ')}
+    ${argumentsText.join('\n    ')}
 
-  args = parser.parse_args()
+    args = parser.parse_args()
 
-  return {${returnText.join('\n            ').slice(0, -1)}}
+    return {${returnText.join('\n            ').slice(0, -1)}}
 
 if __name__ == '__main__':
-  args = cli()
-  main(${args.map((x) => `${x.variableName}=args["${x.variableName}"]`).join(', ')})
+    args = cli()
+    main(${args.map((x) => `${x.variableName}=args["${x.variableName}"]`).join(', ')})
 `;
   return output;
 };
