@@ -36,6 +36,7 @@ def cli() -> Dict[str, Any]:
 
 if __name__ == '__main__':
     args = cli()
-    main(folder=args["folder"], limit=args["limit"])
+    main(folder=args["folder"],
+         limit=args["limit"])
 `);
 });

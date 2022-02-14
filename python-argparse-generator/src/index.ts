@@ -60,7 +60,7 @@ def cli() -> Dict[str, Any]:
 
 if __name__ == '__main__':
     args = cli()
-    main(${args.map((x) => `${x.variableName}=args["${x.variableName}"]`).join(', ')})
+    main(${args.map((x) => `${x.variableName}=args["${x.variableName}"]`).join(',\n         ')})
 `;
   return output;
 };
