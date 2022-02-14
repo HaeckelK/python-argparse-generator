@@ -29,7 +29,7 @@ function argumentToText(argument: Argument, parserName: string) {
 
 const argumentToMainParams = (argument: Argument) => `${argument.variableName}: ${argument.type}`;
 
-export const argparseCode = (args: Argument[], parserName: string) => {
+export const argparseCode = (args: Argument[], parserName: string = "parser") => {
   const mainParameters: string[] = args.map((arg) => argumentToMainParams(arg));
   const argumentsText: string[] = args.map((arg) => argumentToText(arg, parserName));
   const returnText: string[] = args.map((x) => {

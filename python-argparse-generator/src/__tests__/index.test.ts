@@ -13,7 +13,6 @@ test('Basic check of output', () => {
         },
         { name: 'limit', type: 'int', variableName: 'limit', default: '10', required: true },
       ],
-      'parser',
     ),
   ).toBe(`import argparse
 from typing import Dict, Any
