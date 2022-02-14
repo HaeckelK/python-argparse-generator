@@ -6,6 +6,19 @@ export type Argument = {
   required: boolean;
 };
 
+export const newArgument = (
+  name: string,
+  type: string,
+  variableName: string = '',
+  defaultValue: string = '',
+  required: boolean = false,
+): Argument => {
+  if (variableName === '') {
+    variableName = name.replace(/-/g, '');
+  }
+  return { name, type, variableName, default: defaultValue, required };
+};
+
 function argumentToText(argument: Argument, parserName: string) {
   switch (argument.type) {
     case 'bool':
@@ -29,7 +42,7 @@ function argumentToText(argument: Argument, parserName: string) {
 
 const argumentToMainParams = (argument: Argument) => `${argument.variableName}: ${argument.type}`;
 
-export const argparseCode = (args: Argument[], parserName: string = "parser") => {
+export const argparseCode = (args: Argument[], parserName: string = 'parser') => {
   const mainParameters: string[] = args.map((arg) => argumentToMainParams(arg));
   const argumentsText: string[] = args.map((arg) => argumentToText(arg, parserName));
   const returnText: string[] = args.map((x) => {

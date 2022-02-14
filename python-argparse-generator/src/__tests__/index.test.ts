@@ -1,19 +1,17 @@
-import { argparseCode } from '../index';
+import { argparseCode, newArgument } from '../index';
 
 test('Basic check of output', () => {
   expect(
-    argparseCode(
-      [
-        {
-          name: 'folder',
-          type: 'str',
-          variableName: 'folder',
-          default: '/data',
-          required: true,
-        },
-        { name: 'limit', type: 'int', variableName: 'limit', default: '10', required: true },
-      ],
-    ),
+    argparseCode([
+      {
+        name: 'folder',
+        type: 'str',
+        variableName: 'folder',
+        default: '/data',
+        required: true,
+      },
+      { name: 'limit', type: 'int', variableName: 'limit', default: '10', required: true },
+    ]),
   ).toBe(`import argparse
 from typing import Dict, Any
   
@@ -39,4 +37,35 @@ if __name__ == '__main__':
     main(folder=args["folder"],
          limit=args["limit"])
 `);
+});
+
+describe('New Argument Factory', () => {
+  test('Default Parameters', () => {
+    expect(newArgument('folder', 'str')).toStrictEqual({
+      name: 'folder',
+      type: 'str',
+      default: '',
+      variableName: 'folder',
+      required: false,
+    });
+  });
+  // TODO really I should have a variableNameCreate function
+  test('Variable Name Creation', () => {
+    expect(newArgument('time-delay', 'str')).toStrictEqual({
+      name: 'time-delay',
+      type: 'str',
+      default: '',
+      variableName: 'timedelay',
+      required: false,
+    });
+  });
+  test('All Params', () => {
+    expect(newArgument('folder', 'str', 'folder', '/data', true)).toStrictEqual({
+      name: 'folder',
+      type: 'str',
+      default: '/data',
+      variableName: 'folder',
+      required: true,
+    });
+  });
 });
