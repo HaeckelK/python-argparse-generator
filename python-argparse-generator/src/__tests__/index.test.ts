@@ -2,20 +2,19 @@ import { argparseCode } from '../index';
 
 test('Basic check of output', () => {
   expect(
-    argparseCode([
-      {
-        name: 'folder',
-        type: 'str',
-        variableName: 'folder',
-        default: '/data',
-        required: true,
-      },
-      { name: 'limit',
-        type: 'int',
-        variableName: 'limit',
-        default: '10',
-        required: true },
-    ]),
+    argparseCode(
+      [
+        {
+          name: 'folder',
+          type: 'str',
+          variableName: 'folder',
+          default: '/data',
+          required: true,
+        },
+        { name: 'limit', type: 'int', variableName: 'limit', default: '10', required: true },
+      ],
+      'parser',
+    ),
   ).toBe(`import argparse
 from typing import Dict, Any
   
