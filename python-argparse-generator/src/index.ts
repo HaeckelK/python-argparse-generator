@@ -3,7 +3,6 @@ export type Argument = {
   type: string;
   variableName: string;
   default: string;
-  defaultDisplay: string;
   required: boolean;
 };
 
@@ -11,12 +10,19 @@ function argumentToText(argument: Argument) {
   switch (argument.type) {
     case 'bool':
       return `parser.add_argument("${argument.name}", action="store_${argument.default}")`;
-      break;
     default:
+      let defaultDisplay;
+
+      if (argument.type === 'str') {
+        defaultDisplay = `"${argument.default}"`;
+      } else {
+        defaultDisplay = argument.default;
+      }
+
       if (argument.default === undefined) {
         return `parser.add_argument("${argument.name}", type=${argument.type})`;
       } else {
-        return `parser.add_argument("${argument.name}", type=${argument.type}, default=${argument.defaultDisplay})`;
+        return `parser.add_argument("${argument.name}", type=${argument.type}, default=${defaultDisplay})`;
       }
   }
 }

@@ -7,11 +7,14 @@ test('Basic check of output', () => {
         name: 'folder',
         type: 'str',
         variableName: 'folder',
-        default: '"/data"',
-        defaultDisplay: '"/data"',
+        default: '/data',
         required: true,
       },
-      { name: 'limit', type: 'int', variableName: 'limit', default: '10', defaultDisplay: '10', required: true },
+      { name: 'limit',
+        type: 'int',
+        variableName: 'limit',
+        default: '10',
+        required: true },
     ]),
   ).toBe(`import argparse
 from typing import Dict, Any
