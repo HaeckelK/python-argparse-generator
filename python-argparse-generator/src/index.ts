@@ -3,13 +3,15 @@ export type Settings = {
   typeHints: boolean;
   mainContents: string;
   mainName: string;
+  cliName: string;
 }
 
 export const defaultSettings = (): Settings => {
   return {parserName: "parser",
           typeHints: true,
           mainContents: "# Contents of main",
-          mainName: "main"};
+          mainName: "main",
+          cliName: "cli"};
 };
 
 export type Argument = {
@@ -76,7 +78,7 @@ def ${settings.mainName}(${mainParameters.join(', ')}) -> None:
     return
 
 
-def cli() -> Dict[str, Any]:
+def ${settings.cliName}() -> Dict[str, Any]:
     formatter_class = argparse.ArgumentDefaultsHelpFormatter
     ${parserName} = argparse.ArgumentParser(formatter_class=formatter_class)
 
@@ -87,7 +89,7 @@ def cli() -> Dict[str, Any]:
     return {${returnText.join('\n            ').slice(0, -1)}}
 
 if __name__ == '__main__':
-    args = cli()
+    args = ${settings.cliName}()
     ${settings.mainName}(${args.map((x) => `${x.variableName}=args["${x.variableName}"]`).join(',\n         ')})
 `;
   return output;
