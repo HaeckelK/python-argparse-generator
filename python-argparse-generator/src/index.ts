@@ -2,12 +2,14 @@ export type Settings = {
   parserName: string;
   typeHints: boolean;
   mainContents: string;
+  mainName: string;
 }
 
 export const defaultSettings = (): Settings => {
   return {parserName: "parser",
           typeHints: true,
-          mainContents: "# Contents of main"};
+          mainContents: "# Contents of main",
+          mainName: "main"};
 };
 
 export type Argument = {
@@ -69,7 +71,7 @@ export const argparseCode = (args: Argument[], settings: Settings =  defaultSett
   const output = `import argparse
 from typing import Dict, Any
   
-def main(${mainParameters.join(', ')}) -> None:
+def ${settings.mainName}(${mainParameters.join(', ')}) -> None:
     ${settings.mainContents}
     return
 
@@ -86,7 +88,7 @@ def cli() -> Dict[str, Any]:
 
 if __name__ == '__main__':
     args = cli()
-    main(${args.map((x) => `${x.variableName}=args["${x.variableName}"]`).join(',\n         ')})
+    ${settings.mainName}(${args.map((x) => `${x.variableName}=args["${x.variableName}"]`).join(',\n         ')})
 `;
   return output;
 };
