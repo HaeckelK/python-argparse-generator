@@ -1,9 +1,13 @@
 export type Settings = {
   parserName: string;
+  typeHints: boolean;
+  mainContents: string;
 }
 
 export const defaultSettings = (): Settings => {
-  return {parserName: "parser"};
+  return {parserName: "parser",
+          typeHints: true,
+          mainContents: "# Contents of main"};
 };
 
 export type Argument = {
@@ -66,7 +70,7 @@ export const argparseCode = (args: Argument[], settings: Settings =  defaultSett
 from typing import Dict, Any
   
 def main(${mainParameters.join(', ')}) -> None:
-    # Contents of main
+    ${settings.mainContents}
     return
 
 
