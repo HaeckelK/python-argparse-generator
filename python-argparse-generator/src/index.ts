@@ -4,6 +4,7 @@ export type Argument = {
   variableName: string;
   default: string;
   defaultDisplay: string;
+  required: boolean;
 };
 
 function argumentToText(argument: Argument) {

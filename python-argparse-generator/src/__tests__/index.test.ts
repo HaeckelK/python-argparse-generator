@@ -3,8 +3,15 @@ import { GenerateCode } from '../index';
 test('Basic check of output', () => {
   expect(
     GenerateCode([
-      { name: 'folder', type: 'str', variableName: 'folder', default: '"/data"', defaultDisplay: '"/data"' },
-      { name: 'limit', type: 'int', variableName: 'limit', default: '10', defaultDisplay: '10' },
+      {
+        name: 'folder',
+        type: 'str',
+        variableName: 'folder',
+        default: '"/data"',
+        defaultDisplay: '"/data"',
+        required: true,
+      },
+      { name: 'limit', type: 'int', variableName: 'limit', default: '10', defaultDisplay: '10', required: true },
     ]),
   ).toBe(`import argparse
 from typing import Dict, Any
