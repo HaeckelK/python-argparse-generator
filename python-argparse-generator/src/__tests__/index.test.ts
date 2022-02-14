@@ -1,8 +1,8 @@
-import { GenerateCode } from '../index';
+import { argparseCode } from '../index';
 
 test('Basic check of output', () => {
   expect(
-    GenerateCode([
+    argparseCode([
       {
         name: 'folder',
         type: 'str',

@@ -28,7 +28,7 @@ Within HTML:
     <script src="https://unpkg.com/python-argparse-generator/lib/index.js"></script>
 </head>
 <script>
-    const pythonCode = GenerateCode([
+    const pythonCode = argparseCode([
         { name: 'folder', type: 'str', variableName: 'folder', default: '"/data"', defaultDisplay: '"/data"' },
         { name: 'limit', type: 'int', variableName: 'limit', default: '10', defaultDisplay: '10' },
     ]);
@@ -40,14 +40,14 @@ Within HTML:
 Within Typescript:
 
 ```ts
-import { Argument, GenerateCode } from 'python-argparse-generator';
+import { Argument, argparseCode } from 'python-argparse-generator';
 
 const args: Argument[] = [
     { name: 'folder', type: 'str', variableName: 'folder', default: '"/data"', defaultDisplay: '"/data"' },
     { name: 'limit', type: 'int', variableName: 'limit', default: '10', defaultDisplay: '10' },
 ];
 
-const pythonCode = GenerateCode(args);
+const pythonCode = argparseCode(args);
 ```
 
 Where content of `pythonCode` string is:
