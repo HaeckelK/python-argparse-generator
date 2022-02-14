@@ -1,3 +1,11 @@
+export type Settings = {
+  parserName: string;
+}
+
+export const defaultSettings = (): Settings => {
+  return {parserName: "parser"};
+};
+
 export type Argument = {
   name: string;
   type: string;
@@ -42,7 +50,8 @@ function argumentToText(argument: Argument, parserName: string) {
 
 const argumentToMainParams = (argument: Argument) => `${argument.variableName}: ${argument.type}`;
 
-export const argparseCode = (args: Argument[], parserName: string = 'parser') => {
+export const argparseCode = (args: Argument[], settings: Settings =  defaultSettings()) => {
+  const parserName: string = settings.parserName;
   const mainParameters: string[] = args.map((arg) => argumentToMainParams(arg));
   const argumentsText: string[] = args.map((arg) => argumentToText(arg, parserName));
   const returnText: string[] = args.map((x) => {
