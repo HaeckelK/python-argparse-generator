@@ -1,6 +1,6 @@
 {
   "name": "python-argparse-generator",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "description": "NPM package for generation of Python code (as text) to streamline writing boilerplate argparse setup.",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
