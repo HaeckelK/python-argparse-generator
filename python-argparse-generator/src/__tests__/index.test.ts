@@ -1,6 +1,16 @@
-import { argparseCode, newArgument } from '../index';
+import { argparseCode, newArgument, defaultSettings } from '../index';
 
 describe('Check Of argparseCode Output', () => {
+  const args = [
+    {
+      name: 'folder',
+      type: 'str',
+      variableName: 'folder',
+      default: '/data',
+      required: true,
+    },
+    { name: 'limit', type: 'int', variableName: 'limit', default: '10', required: true },
+  ];
   test('Basic check of output', () => {
     expect(
       argparseCode([
@@ -23,6 +33,36 @@ def main(folder: str, limit: int) -> None:
 
 
 def cli() -> Dict[str, Any]:
+    formatter_class = argparse.ArgumentDefaultsHelpFormatter
+    parser = argparse.ArgumentParser(formatter_class=formatter_class)
+
+    parser.add_argument("folder", type=str, default="/data")
+    parser.add_argument("limit", type=int, default=10)
+
+    args = parser.parse_args()
+
+    return {"folder": args.folder,
+            "limit": int(args.limit)}
+
+
+if __name__ == '__main__':
+    args = cli()
+    main(folder=args["folder"],
+         limit=args["limit"])
+`);
+  });
+  test('Type Hints False', () => {
+    let settings = defaultSettings();
+    settings.typeHints = false;
+    expect(argparseCode(args, settings)).toBe(`import argparse
+
+
+def main(folder, limit):
+    # Contents of main
+    return
+
+
+def cli():
     formatter_class = argparse.ArgumentDefaultsHelpFormatter
     parser = argparse.ArgumentParser(formatter_class=formatter_class)
 

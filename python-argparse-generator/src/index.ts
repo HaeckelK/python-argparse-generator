@@ -60,12 +60,18 @@ function argumentToText(argument: Argument, parserName: string) {
   }
 }
 
-const argumentToMainParams = (argument: Argument) => `${argument.variableName}: ${argument.type}`;
+const argumentToMainParams = (argument: Argument, typeHints: boolean) => {
+  if (typeHints) {
+    return `${argument.variableName}: ${argument.type}`;
+  } else {
+    return `${argument.variableName}`;
+  }
+  };
 
 export const argparseCode = (args: Argument[], settings: Settings = defaultSettings()) => {
   const parserName: string = settings.parserName;
   const argsName: string = settings.argsName;
-  const mainParameters: string[] = args.map((arg) => argumentToMainParams(arg));
+  const mainParameters: string[] = args.map((arg) => argumentToMainParams(arg, settings.typeHints));
   const argumentsText: string[] = args.map((arg) => argumentToText(arg, parserName));
   const returnText: string[] = args.map((x) => {
     if (x.type === 'str') {
@@ -75,16 +81,19 @@ export const argparseCode = (args: Argument[], settings: Settings = defaultSetti
     }
   });
 
-  const output = `import argparse
-from typing import Dict, Any
+  const mainReturnType = settings.typeHints ? ' -> None' : '';
+  const cliReturnType = settings.typeHints ? ' -> Dict[str, Any]' : '';
+  const typeImports = settings.typeHints ? '\nfrom typing import Dict, Any' : '';
+
+  const output = `import argparse${typeImports}
 
 
-def ${settings.mainName}(${mainParameters.join(', ')}) -> None:
+def ${settings.mainName}(${mainParameters.join(', ')})${mainReturnType}:
     ${settings.mainContents}
     return
 
 
-def ${settings.cliName}() -> Dict[str, Any]:
+def ${settings.cliName}()${cliReturnType}:
     formatter_class = argparse.ArgumentDefaultsHelpFormatter
     ${parserName} = argparse.ArgumentParser(formatter_class=formatter_class)
 
