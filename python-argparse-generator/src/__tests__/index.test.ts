@@ -14,7 +14,8 @@ test('Basic check of output', () => {
     ]),
   ).toBe(`import argparse
 from typing import Dict, Any
-  
+
+
 def main(folder: str, limit: int) -> None:
     # Contents of main
     return
@@ -31,6 +32,7 @@ def cli() -> Dict[str, Any]:
 
     return {"folder": args.folder,
             "limit": int(args.limit)}
+
 
 if __name__ == '__main__':
     args = cli()

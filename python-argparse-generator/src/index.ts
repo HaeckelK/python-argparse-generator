@@ -75,7 +75,8 @@ export const argparseCode = (args: Argument[], settings: Settings =  defaultSett
 
   const output = `import argparse
 from typing import Dict, Any
-  
+
+
 def ${settings.mainName}(${mainParameters.join(', ')}) -> None:
     ${settings.mainContents}
     return
@@ -90,6 +91,7 @@ def ${settings.cliName}() -> Dict[str, Any]:
     ${argsName} = ${parserName}.parse_args()
 
     return {${returnText.join('\n            ').slice(0, -1)}}
+
 
 if __name__ == '__main__':
     ${argsName} = ${settings.cliName}()
