@@ -4,6 +4,7 @@ export type Settings = {
   mainContents: string;
   mainName: string;
   cliName: string;
+  argsName: string;
 }
 
 export const defaultSettings = (): Settings => {
@@ -11,7 +12,8 @@ export const defaultSettings = (): Settings => {
           typeHints: true,
           mainContents: "# Contents of main",
           mainName: "main",
-          cliName: "cli"};
+          cliName: "cli",
+          argsName: "args"};
 };
 
 export type Argument = {
@@ -60,13 +62,14 @@ const argumentToMainParams = (argument: Argument) => `${argument.variableName}: 
 
 export const argparseCode = (args: Argument[], settings: Settings =  defaultSettings()) => {
   const parserName: string = settings.parserName;
+  const argsName: string = settings.argsName;
   const mainParameters: string[] = args.map((arg) => argumentToMainParams(arg));
   const argumentsText: string[] = args.map((arg) => argumentToText(arg, parserName));
   const returnText: string[] = args.map((x) => {
     if (x.type === 'str') {
-      return `"${x.variableName}": args.${x.variableName},`;
+      return `"${x.variableName}": ${argsName}.${x.variableName},`;
     } else {
-      return `"${x.variableName}": ${x.type}(args.${x.variableName}),`;
+      return `"${x.variableName}": ${x.type}(${argsName}.${x.variableName}),`;
     }
   });
 
@@ -84,13 +87,13 @@ def ${settings.cliName}() -> Dict[str, Any]:
 
     ${argumentsText.join('\n    ')}
 
-    args = ${parserName}.parse_args()
+    ${argsName} = ${parserName}.parse_args()
 
     return {${returnText.join('\n            ').slice(0, -1)}}
 
 if __name__ == '__main__':
-    args = ${settings.cliName}()
-    ${settings.mainName}(${args.map((x) => `${x.variableName}=args["${x.variableName}"]`).join(',\n         ')})
+    ${argsName} = ${settings.cliName}()
+    ${settings.mainName}(${args.map((x) => `${x.variableName}=${argsName}["${x.variableName}"]`).join(',\n         ')})
 `;
   return output;
 };
