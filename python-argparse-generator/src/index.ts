@@ -66,7 +66,7 @@ const argumentToMainParams = (argument: Argument, typeHints: boolean) => {
   } else {
     return `${argument.variableName}`;
   }
-  };
+};
 
 export const argparseCode = (args: Argument[], settings: Settings = defaultSettings()) => {
   const parserName: string = settings.parserName;
