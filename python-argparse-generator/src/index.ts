@@ -5,15 +5,17 @@ export type Settings = {
   mainName: string;
   cliName: string;
   argsName: string;
-}
+};
 
 export const defaultSettings = (): Settings => {
-  return {parserName: "parser",
-          typeHints: true,
-          mainContents: "# Contents of main",
-          mainName: "main",
-          cliName: "cli",
-          argsName: "args"};
+  return {
+    parserName: 'parser',
+    typeHints: true,
+    mainContents: '# Contents of main',
+    mainName: 'main',
+    cliName: 'cli',
+    argsName: 'args',
+  };
 };
 
 export type Argument = {
@@ -60,7 +62,7 @@ function argumentToText(argument: Argument, parserName: string) {
 
 const argumentToMainParams = (argument: Argument) => `${argument.variableName}: ${argument.type}`;
 
-export const argparseCode = (args: Argument[], settings: Settings =  defaultSettings()) => {
+export const argparseCode = (args: Argument[], settings: Settings = defaultSettings()) => {
   const parserName: string = settings.parserName;
   const argsName: string = settings.argsName;
   const mainParameters: string[] = args.map((arg) => argumentToMainParams(arg));

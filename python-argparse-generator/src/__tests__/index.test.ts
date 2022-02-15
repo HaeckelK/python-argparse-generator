@@ -1,18 +1,19 @@
 import { argparseCode, newArgument } from '../index';
 
-test('Basic check of output', () => {
-  expect(
-    argparseCode([
-      {
-        name: 'folder',
-        type: 'str',
-        variableName: 'folder',
-        default: '/data',
-        required: true,
-      },
-      { name: 'limit', type: 'int', variableName: 'limit', default: '10', required: true },
-    ]),
-  ).toBe(`import argparse
+describe('Check Of argparseCode Output', () => {
+  test('Basic check of output', () => {
+    expect(
+      argparseCode([
+        {
+          name: 'folder',
+          type: 'str',
+          variableName: 'folder',
+          default: '/data',
+          required: true,
+        },
+        { name: 'limit', type: 'int', variableName: 'limit', default: '10', required: true },
+      ]),
+    ).toBe(`import argparse
 from typing import Dict, Any
 
 
@@ -39,6 +40,7 @@ if __name__ == '__main__':
     main(folder=args["folder"],
          limit=args["limit"])
 `);
+  });
 });
 
 describe('New Argument Factory', () => {
