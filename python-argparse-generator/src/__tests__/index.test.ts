@@ -9,7 +9,8 @@ describe('Check Of argparseCode Output', () => {
       default: '/data',
       required: true,
     },
-    { name: 'limit', type: 'int', variableName: 'limit', default: '10', required: true },  ];
+    { name: 'limit', type: 'int', variableName: 'limit', default: '10', required: true },
+  ];
   test('Basic check of output', () => {
     expect(
       argparseCode([
