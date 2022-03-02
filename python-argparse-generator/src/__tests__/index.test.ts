@@ -39,8 +39,8 @@ def cli() -> Dict[str, Any]:
 
     parser.add_argument("folder", type=str, default="/data")
     parser.add_argument("limit", type=int, default=10)
-    parser.add_argument("filename", type=str, default="")
-    parser.add_argument("delay", type=int, default=)
+    parser.add_argument("filename", type=str)
+    parser.add_argument("delay", type=int)
 
     args = parser.parse_args()
 
