@@ -22,12 +22,14 @@ describe('Check Of argparseCode Output', () => {
           required: true,
         },
         { name: 'limit', type: 'int', variableName: 'limit', default: '10', required: true },
+        { name: 'filename', type: 'str', variableName: 'filename', default: '', required: true },
+        { name: 'delay', type: 'int', variableName: 'delay', default: '', required: true },
       ]),
     ).toBe(`import argparse
 from typing import Dict, Any
 
 
-def main(folder: str, limit: int) -> None:
+def main(folder: str, limit: int, filename: str, delay: int) -> None:
     # Contents of main
     return
 
@@ -38,17 +40,23 @@ def cli() -> Dict[str, Any]:
 
     parser.add_argument("folder", type=str, default="/data")
     parser.add_argument("limit", type=int, default=10)
+    parser.add_argument("filename", type=str)
+    parser.add_argument("delay", type=int)
 
     args = parser.parse_args()
 
     return {"folder": args.folder,
-            "limit": int(args.limit)}
+            "limit": int(args.limit),
+            "filename": args.filename,
+            "delay": int(args.delay)}
 
 
 if __name__ == '__main__':
     args = cli()
     main(folder=args["folder"],
-         limit=args["limit"])
+         limit=args["limit"],
+         filename=args["filename"],
+         delay=args["delay"])
 `);
   });
   test('Type Hints False', () => {
