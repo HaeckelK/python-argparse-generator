@@ -52,7 +52,7 @@ function argumentToText(argument: Argument, parserName: string) {
         defaultDisplay = argument.default;
       }
 
-      if (argument.default === undefined) {
+      if (argument.default === '') {
         return `${parserName}.add_argument("${argument.name}", type=${argument.type})`;
       } else {
         return `${parserName}.add_argument("${argument.name}", type=${argument.type}, default=${defaultDisplay})`;
